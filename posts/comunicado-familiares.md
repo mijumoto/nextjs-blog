@@ -14,7 +14,7 @@ He tomado nuevas responsabilidades en la empresa en la cual trabajo las cuales p
 
 Sé que esto les parecerá drástico y no va dirigido a ninguno de ustedes en particular, al contrario me siento agradecido de tenerlos en mí círculo. Me he sentado un tiempo a analizar mi vida y lo que quiero lograr, así que he pensado que esta es una de esas decisiones que me ayudaran a llegar a la meta. Uno no puede esperar tener resultados extraordinarios siendo ordinario. Espero que entiendan y espero también seguir teniendo la amistad y cariño que he recibido de todos ustedes.
 
-Abrazos
+Abrazos 🤗
 
 Miguel Vásquez
 
