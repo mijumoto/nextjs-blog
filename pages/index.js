@@ -12,7 +12,25 @@ export default function Home({ allPostsData }) {
         <title>{siteTitle}</title>
       </Head>
       <section className={utilStyles.headingMd}>
-        <p>Hello, I'm Miguel. I'm a software engineer at Evercast, LLC. You can contact me on  <a href="https://twitter.com/papaliborio">Twitter</a>.</p>
+        <p>I'm a Full-time Quality Assurance Engineer who loves programming and SaaS. I'm passionate about quality and learning. I have many certifications in the field. I have expertise in DevOps, backend development, and some frontend development. QA Skills: Test Automation, CI/CD, DevOps testing, agile testing, and others.</p>
+        <table>
+        <tr>
+          <td>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/LinkedIn_logo_initials.png/768px-LinkedIn_logo_initials.png" alt="Linkedin" width="25" height="25"></img>
+          </td>
+          <td>
+            <a href="https://www.linkedin.com/in/mvz">Linkedin</a>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <img src="https://image.flaticon.com/icons/png/512/25/25231.png" alt="Github" width="25" height="25"></img>
+          </td>
+          <td>
+            <a href="https://github.com/mijumoto">Github</a>
+          </td>
+        </tr>
+        </table>
       </section>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Blog</h2>
