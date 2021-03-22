@@ -4,9 +4,11 @@
 /node_modules
 /.pnp
 .pnp.js
+*.mp4
 
 # testing
 /coverage
+tests/e2e/snapshots/actual/
 
 # next.js
 /.next/
