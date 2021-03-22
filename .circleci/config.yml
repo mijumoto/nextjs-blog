@@ -1,0 +1,30 @@
+version: 2.1
+
+jobs:
+  build-app:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - app-dependencies-{{ checksum "package-lock.json" }}
+            - app-dependencies-
+      - run:
+          name: install dependencies
+          command: |
+            npm install
+            npm build
+      - save_cache:
+          paths:
+            - ./node_modules
+            - ./.next
+          key: app-dependencies-{{ checksum "package-lock.json" }}
+      - run:
+          name: run lint
+          command: |
+            npm run lint
+workflows:
+  default:
+    jobs:
+      - build-app
