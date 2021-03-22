@@ -13,7 +13,7 @@ export default function Home({ allPostsData }) {
         <title>{siteTitle}</title>
       </Head>
       <section className={utilStyles.headingMd}>
-      <p><p>I&apos;m a Full-time Quality Assurance Engineer who loves programming and SaaS. I&apos;m passionate about quality and learning. I have many certifications in the field. I have expertise in DevOps, backend development, and some frontend development. QA Skills: Test Automation, CI/CD, DevOps testing, agile testing, and others.</p>
+      <p>I&apos;m a Full-time Quality Assurance Engineer who loves programming and SaaS. I&apos;m passionate about quality and learning. I have many certifications in the field. I have expertise in DevOps, backend development, and some frontend development. QA Skills: Test Automation, CI/CD, DevOps testing, agile testing, and others.</p>
         <table>
         <tr>
           <td>
