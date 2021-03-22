@@ -1,3 +1,4 @@
+/* eslint react/prop-types: 0 */
 import Head from 'next/head'
 import styles from './layout.module.css'
 import utilStyles from '../styles/utils.module.css'

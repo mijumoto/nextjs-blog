@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "./node_modules/.bin/eslint ."
   },
   "dependencies": {
     "date-fns": "^2.15.0",
@@ -15,5 +16,9 @@
     "react-dom": "17.0.1",
     "remark": "^13.0.0",
     "remark-html": "^13.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.22.0",
+    "eslint-plugin-react": "^7.22.0"
   }
 }
