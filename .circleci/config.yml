@@ -87,7 +87,7 @@ jobs:
       - run:
           name: install snyk
           command: |
-            npm install -g snyk
+            npm install snyk
             ./node_modules/.bin/snyk config set api=${SNYK_TOKEN}
       - run:
           name: snyk security scan
