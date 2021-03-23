@@ -20,11 +20,53 @@ jobs:
             - ./node_modules
             - ./.next
           key: app-dependencies-{{ checksum "package-lock.json" }}
+  audit:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - app-dependencies-{{ checksum "package-lock.json" }}
+            - app-dependencies-
+      - run:
+          name: npm audit
+          command: |
+            npm audit
+  lint:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - app-dependencies-{{ checksum "package-lock.json" }}
+            - app-dependencies-
       - run:
           name: run lint
           command: |
             npm run lint
+
+  unit:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - app-dependencies-{{ checksum "package-lock.json" }}
+            - app-dependencies-
+      - run:
+          name: npm audit
+          command: |
+            npm run unit
 workflows:
   default:
     jobs:
       - build-app
+      - audit:
+          requires: [build-app]
+      - lint:
+          requires: [build-app]
+      - unit:
+          requires: [build-app]
