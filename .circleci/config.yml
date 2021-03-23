@@ -1,5 +1,6 @@
 version: 2.1
-
+orbs:
+  snyk: snyk/snyk@0.0.13
 jobs:
   build-app:
     docker:
@@ -13,7 +14,7 @@ jobs:
       - run:
           name: install dependencies
           command: |
-            npm install
+            npm install --no-audit
             npm build
       - save_cache:
           paths:
@@ -70,9 +71,19 @@ jobs:
           docker_layer_caching: true
       - run:
           command: |
-            export TAG=0.1.$CIRCLE_BUILD_NUM
-            docker build -t $TAG .
-            docker save --output image.tar $TAG
+            IMAGE=$DOCKER_USER/$DOCKER_REPO:0.1.$CIRCLE_BUILD_NUM
+            echo 'export PATH=~$PATH:~/.local/bin' >> $BASH_ENV
+            echo 'export $IMAGE' >> $BASH_ENV && source $BASH_ENV
+            docker build -t $IMAGE .
+            docker save --output image.tar $IMAGE
+      - snyk/scan:
+          fail-on-issues: true
+          monitor-on-build: true
+          docker-image-name: $IMAGE
+          target-file: "Dockerfile"
+          project: ${CIRCLE_PROJECT_REPONAME}/${CIRCLE_BRANCH}-app
+          token-variable: $SNYK_TOKEN
+          additional-arguments: --exclude-base-image-vulns
 #            echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
 #            docker push $DOCKER_REPO:$TAG
 #      - run:
@@ -101,7 +112,7 @@ jobs:
       - run:
           name: install snyk
           command: |
-            npm install snyk
+            npm install snyk --no-audit
             ./node_modules/.bin/snyk config set api=${SNYK_TOKEN}
       - run:
           name: snyk security scan
@@ -120,5 +131,5 @@ workflows:
 #      - build-image:
 #          requires: [audit, lint, unit]
       - build-image
-      - snyk-scan:
-          requires: [build-image]
+#      - snyk-scan:
+#          requires: [build-image]
