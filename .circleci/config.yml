@@ -75,10 +75,10 @@ jobs:
             docker save --output image.tar $TAG
 #            echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
 #            docker push $DOCKER_REPO:$TAG
-      - run:
-          name: archive docker image
-          command: |
-            docker save --output image.tar $TAG:latest
+#      - run:
+#          name: archive docker image
+#          command: |
+#            docker save --output image.tar $TAG:latest
       - persist_to_workspace:
           root: .
           paths:
