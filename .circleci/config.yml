@@ -84,12 +84,6 @@ jobs:
           project: ${CIRCLE_PROJECT_REPONAME}/${CIRCLE_BRANCH}-app
           token-variable: SNYK_TOKEN
           additional-arguments: --exclude-base-image-vulns
-#            echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-#            docker push $DOCKER_REPO:$TAG
-#      - run:
-#          name: archive docker image
-#          command: |
-#            docker save --output image.tar $TAG:latest
       - persist_to_workspace:
           root: .
           paths:
@@ -133,3 +127,11 @@ workflows:
       - build-image
 #      - snyk-scan:
 #          requires: [build-image]
+
+
+#            echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+#            docker push $DOCKER_REPO:$TAG
+#      - run:
+#          name: archive docker image
+#          command: |
+#            docker save --output image.tar $TAG:latest
