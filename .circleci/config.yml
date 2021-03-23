@@ -97,14 +97,15 @@ jobs:
 workflows:
   build:
     jobs:
-      - build-app
-      - audit:
-          requires: [build-app]
-      - lint:
-          requires: [build-app]
-      - unit:
-          requires: [build-app]
-      - build-image:
-          requires: [audit, lint, unit]
+#      - build-app
+#      - audit:
+#          requires: [build-app]
+#      - lint:
+#          requires: [build-app]
+#      - unit:
+#          requires: [build-app]
+#      - build-image:
+#          requires: [audit, lint, unit]
+      - build-image
       - snyk-scan:
           requires: [build-image]
