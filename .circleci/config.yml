@@ -72,6 +72,7 @@ jobs:
           command: |
             export TAG=0.1.$CIRCLE_BUILD_NUM
             docker build -t $TAG .
+            docker save --output image.tar $TAG
 #            echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
 #            docker push $DOCKER_REPO:$TAG
       - run:
