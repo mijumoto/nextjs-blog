@@ -1,5 +1,7 @@
 version: 2.1
 
+orbs:
+  snyk: garethr/snyk@0.3.0
 jobs:
   build-app:
     docker:
@@ -60,8 +62,41 @@ jobs:
           name: npm audit
           command: |
             npm run unit
+  build-image:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 19.03.13
+          docker_layer_caching: true
+      - run:
+          command: |
+            TAG=0.1.$CIRCLE_BUILD_NUM
+            docker build -t $DOCKER_REPO:$TAG .
+            echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+            docker push $DOCKER_REPO:$TAG
+  snyk-scan:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - app-dependencies-{{ checksum "package-lock.json" }}
+            - app-dependencies-
+      - run:
+          name: install snyk
+          command: |
+            npm install -g snyk
+            ./node_modules/.bin/snyk config set api=${SNYK_TOKEN}
+      - run:
+          name: snyk security scan
+          command: |
+            docker pull mijumoto/udacitycapstone:latest
+            ./node_modules/.bin/snyk container test 0.1.$CIRCLE_BUILD_NUM --file=Dockerfile --exclude-base-image-vulns
 workflows:
-  default:
+  build:
     jobs:
       - build-app
       - audit:
@@ -70,3 +105,7 @@ workflows:
           requires: [build-app]
       - unit:
           requires: [build-app]
+      - build-image:
+          requires: [audit, lint, unit]
+      - snyk-scan:
+          requires: [build-image]
