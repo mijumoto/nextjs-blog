@@ -86,30 +86,6 @@ jobs:
           root: .
           paths:
             - ./image.tar
-  snyk-scan:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - checkout
-      - setup_remote_docker
-      - attach_workspace:
-          at: /tmp/workspace
-      - restore_cache:
-          keys:
-            - app-dependencies-{{ checksum "package-lock.json" }}
-            - app-dependencies-
-      - run:
-          name: Load archived Docker image
-          command: docker load -i /tmp/workspace/image.tar
-      - run:
-          name: install snyk
-          command: |
-            npm install snyk --no-audit
-            ./node_modules/.bin/snyk config set api=${SNYK_TOKEN}
-      - run:
-          name: snyk security scan
-          command: |
-            ./node_modules/.bin/snyk container test 0.1.$CIRCLE_BUILD_NUM --file=Dockerfile --exclude-base-image-vulns
 workflows:
   build:
     jobs:
@@ -123,13 +99,7 @@ workflows:
 #      - build-image:
 #          requires: [audit, lint, unit]
       - build-image
-#      - snyk-scan:
-#          requires: [build-image]
 
 
 #            echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
 #            docker push $DOCKER_REPO:$TAG
-#      - run:
-#          name: archive docker image
-#          command: |
-#            docker save --output image.tar $TAG:latest
