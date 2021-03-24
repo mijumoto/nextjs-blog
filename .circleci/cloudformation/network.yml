@@ -122,7 +122,7 @@ Resources:
         Domain: vpc
         Tags: 
             - Key: Name 
-              Value: !Sub ${EnvironmentName} Public Sub EIP 1
+              Value: !Sub ${EnvironmentName} Public Sub EIP 2
 
   NatGateway1: 
     Type: AWS::EC2::NatGateway
