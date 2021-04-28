@@ -17,7 +17,7 @@
     "@babel/plugin-syntax-jsx": "^7.12.13",
     "date-fns": "^2.15.0",
     "gray-matter": "^4.0.2",
-    "next": "10.0.9",
+    "next": "10.2.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "remark": "^13.0.0",
